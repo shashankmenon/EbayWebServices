@@ -1,0 +1,5 @@
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_singleitem\Ebay_singleitem\bin\Ebay_singleitem.dll
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_singleitem\Ebay_singleitem\bin\Ebay_singleitem.pdb
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_singleitem\Ebay_singleitem\obj\Debug\ResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_singleitem\Ebay_singleitem\obj\Debug\Ebay_singleitem.dll
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_singleitem\Ebay_singleitem\obj\Debug\Ebay_singleitem.pdb

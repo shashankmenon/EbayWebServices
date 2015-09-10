@@ -1,0 +1,1495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="urn:ebay:apis:eBLBaseComponents" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="urn:ebay:apis:eBLBaseComponents" />
+      <s:element name="getsingleitemdetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="item_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getsingleitemdetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getsingleitemdetailsResult" type="s1:GetSingleItemResponseType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="urn:ebay:apis:eBLBaseComponents">
+      <s:complexType name="GetSingleItemResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Item" type="s1:SimpleItemType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AbstractResponseType" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Timestamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ack" type="s1:AckCodeType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Errors" type="s1:ErrorType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Build" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CorrelationID" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="AckCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="Failure" />
+          <s:enumeration value="Warning" />
+          <s:enumeration value="PartialFailure" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShortMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LongMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserDisplayHint" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SeverityCode" type="s1:SeverityCodeType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ErrorParameters" type="s1:ErrorParameterType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorClassification" type="s1:ErrorClassificationCodeType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SeverityCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Warning" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ErrorParameterType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+        <s:attribute name="ParamID" type="s:string" />
+      </s:complexType>
+      <s:simpleType name="ErrorClassificationCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="RequestError" />
+          <s:enumeration value="SystemError" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="GetItemStatusResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Item" type="s1:SimpleItemType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="SimpleItemType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BestOfferEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyItNowPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyItNowAvailable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConvertedBuyItNowPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ViewItemURLForNaturalSearch" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListingType" type="s1:ListingTypeCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PaymentMethods" type="s1:BuyerPaymentMethodCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="GalleryURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PictureURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCategoryID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCategoryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seller" type="s1:SimpleUserType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BidCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConvertedCurrentPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="HighBidder" type="s1:SimpleUserType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListingStatus" type="s1:ListingStatusCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantitySold" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReserveMet" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipToLocations" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Site" type="s1:SiteCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeLeft" type="s:duration" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingCostSummary" type="s1:ShippingCostSummaryType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemSpecifics" type="s1:ArrayOfNameValueListType" />
+          <s:element minOccurs="0" maxOccurs="1" name="HitCount" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subtitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PrimaryCategoryIDPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCategoryID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCategoryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondaryCategoryIDPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Charity" type="s1:CharityType" />
+          <s:element minOccurs="0" maxOccurs="1" name="GermanMotorsSearchable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="GetItFast" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gift" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PictureExists" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecentListing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Storefront" type="s1:StorefrontType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DistanceFromBuyer" type="s1:DistanceType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s1:CountryCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="WatchCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HalfItemCondition" type="s1:HalfItemConditionCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerComments" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnPolicy" type="s1:ReturnPolicyType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinimumToBid" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductID" type="s1:ProductIDType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AutoPay" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessSellerDetails" type="s1:BusinessSellerDetailsType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PaymentAllowedSite" type="s1:SiteCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="IntegratedMerchantCreditCardEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Variations" type="s1:VariationsType" />
+          <s:element minOccurs="0" maxOccurs="1" name="HandlingTime" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LotSize" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConditionID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConditionDisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantityAvailableHint" type="s1:QuantityAvailableHintCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantityThreshold" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscountPriceInfo" type="s1:DiscountPriceInfoType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExcludeShipToLocation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TopRatedListing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="VhrUrl" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="VhrAvailable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantityInfo" type="s1:QuantityInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitInfo" type="s1:UnitInfoType" />
+          <s:element minOccurs="0" maxOccurs="1" name="GlobalShipping" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+          <s:element minOccurs="0" maxOccurs="1" name="ConditionDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AmountType">
+        <s:simpleContent>
+          <s:extension base="s:double">
+            <s:attribute name="currencyID" type="s1:CurrencyCodeType" use="required" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="CurrencyCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="AFA" />
+          <s:enumeration value="ALL" />
+          <s:enumeration value="DZD" />
+          <s:enumeration value="ADP" />
+          <s:enumeration value="AOA" />
+          <s:enumeration value="ARS" />
+          <s:enumeration value="AMD" />
+          <s:enumeration value="AWG" />
+          <s:enumeration value="AZM" />
+          <s:enumeration value="BSD" />
+          <s:enumeration value="BHD" />
+          <s:enumeration value="BDT" />
+          <s:enumeration value="BBD" />
+          <s:enumeration value="BYR" />
+          <s:enumeration value="BZD" />
+          <s:enumeration value="BMD" />
+          <s:enumeration value="BTN" />
+          <s:enumeration value="INR" />
+          <s:enumeration value="BOV" />
+          <s:enumeration value="BOB" />
+          <s:enumeration value="BAM" />
+          <s:enumeration value="BWP" />
+          <s:enumeration value="BRL" />
+          <s:enumeration value="BND" />
+          <s:enumeration value="BGL" />
+          <s:enumeration value="BGN" />
+          <s:enumeration value="BIF" />
+          <s:enumeration value="KHR" />
+          <s:enumeration value="CAD" />
+          <s:enumeration value="CVE" />
+          <s:enumeration value="KYD" />
+          <s:enumeration value="XAF" />
+          <s:enumeration value="CLF" />
+          <s:enumeration value="CLP" />
+          <s:enumeration value="CNY" />
+          <s:enumeration value="COP" />
+          <s:enumeration value="KMF" />
+          <s:enumeration value="CDF" />
+          <s:enumeration value="CRC" />
+          <s:enumeration value="HRK" />
+          <s:enumeration value="CUP" />
+          <s:enumeration value="CYP" />
+          <s:enumeration value="CZK" />
+          <s:enumeration value="DKK" />
+          <s:enumeration value="DJF" />
+          <s:enumeration value="DOP" />
+          <s:enumeration value="TPE" />
+          <s:enumeration value="ECV" />
+          <s:enumeration value="ECS" />
+          <s:enumeration value="EGP" />
+          <s:enumeration value="SVC" />
+          <s:enumeration value="ERN" />
+          <s:enumeration value="EEK" />
+          <s:enumeration value="ETB" />
+          <s:enumeration value="FKP" />
+          <s:enumeration value="FJD" />
+          <s:enumeration value="GMD" />
+          <s:enumeration value="GEL" />
+          <s:enumeration value="GHC" />
+          <s:enumeration value="GIP" />
+          <s:enumeration value="GTQ" />
+          <s:enumeration value="GNF" />
+          <s:enumeration value="GWP" />
+          <s:enumeration value="GYD" />
+          <s:enumeration value="HTG" />
+          <s:enumeration value="HNL" />
+          <s:enumeration value="HKD" />
+          <s:enumeration value="HUF" />
+          <s:enumeration value="ISK" />
+          <s:enumeration value="IDR" />
+          <s:enumeration value="IRR" />
+          <s:enumeration value="IQD" />
+          <s:enumeration value="ILS" />
+          <s:enumeration value="JMD" />
+          <s:enumeration value="JPY" />
+          <s:enumeration value="JOD" />
+          <s:enumeration value="KZT" />
+          <s:enumeration value="KES" />
+          <s:enumeration value="AUD" />
+          <s:enumeration value="KPW" />
+          <s:enumeration value="KRW" />
+          <s:enumeration value="KWD" />
+          <s:enumeration value="KGS" />
+          <s:enumeration value="LAK" />
+          <s:enumeration value="LVL" />
+          <s:enumeration value="LBP" />
+          <s:enumeration value="LSL" />
+          <s:enumeration value="LRD" />
+          <s:enumeration value="LYD" />
+          <s:enumeration value="CHF" />
+          <s:enumeration value="LTL" />
+          <s:enumeration value="MOP" />
+          <s:enumeration value="MKD" />
+          <s:enumeration value="MGF" />
+          <s:enumeration value="MWK" />
+          <s:enumeration value="MYR" />
+          <s:enumeration value="MVR" />
+          <s:enumeration value="MTL" />
+          <s:enumeration value="EUR" />
+          <s:enumeration value="MRO" />
+          <s:enumeration value="MUR" />
+          <s:enumeration value="MXN" />
+          <s:enumeration value="MXV" />
+          <s:enumeration value="MDL" />
+          <s:enumeration value="MNT" />
+          <s:enumeration value="XCD" />
+          <s:enumeration value="MZM" />
+          <s:enumeration value="MMK" />
+          <s:enumeration value="ZAR" />
+          <s:enumeration value="NAD" />
+          <s:enumeration value="NPR" />
+          <s:enumeration value="ANG" />
+          <s:enumeration value="XPF" />
+          <s:enumeration value="NZD" />
+          <s:enumeration value="NIO" />
+          <s:enumeration value="NGN" />
+          <s:enumeration value="NOK" />
+          <s:enumeration value="OMR" />
+          <s:enumeration value="PKR" />
+          <s:enumeration value="PAB" />
+          <s:enumeration value="PGK" />
+          <s:enumeration value="PYG" />
+          <s:enumeration value="PEN" />
+          <s:enumeration value="PHP" />
+          <s:enumeration value="PLN" />
+          <s:enumeration value="USD" />
+          <s:enumeration value="QAR" />
+          <s:enumeration value="ROL" />
+          <s:enumeration value="RUB" />
+          <s:enumeration value="RUR" />
+          <s:enumeration value="RWF" />
+          <s:enumeration value="SHP" />
+          <s:enumeration value="WST" />
+          <s:enumeration value="STD" />
+          <s:enumeration value="SAR" />
+          <s:enumeration value="SCR" />
+          <s:enumeration value="SLL" />
+          <s:enumeration value="SGD" />
+          <s:enumeration value="SKK" />
+          <s:enumeration value="SIT" />
+          <s:enumeration value="SBD" />
+          <s:enumeration value="SOS" />
+          <s:enumeration value="LKR" />
+          <s:enumeration value="SDD" />
+          <s:enumeration value="SRG" />
+          <s:enumeration value="SZL" />
+          <s:enumeration value="SEK" />
+          <s:enumeration value="SYP" />
+          <s:enumeration value="TWD" />
+          <s:enumeration value="TJS" />
+          <s:enumeration value="TZS" />
+          <s:enumeration value="THB" />
+          <s:enumeration value="XOF" />
+          <s:enumeration value="TOP" />
+          <s:enumeration value="TTD" />
+          <s:enumeration value="TND" />
+          <s:enumeration value="TRL" />
+          <s:enumeration value="TMM" />
+          <s:enumeration value="UGX" />
+          <s:enumeration value="UAH" />
+          <s:enumeration value="AED" />
+          <s:enumeration value="GBP" />
+          <s:enumeration value="USS" />
+          <s:enumeration value="USN" />
+          <s:enumeration value="UYU" />
+          <s:enumeration value="UZS" />
+          <s:enumeration value="VUV" />
+          <s:enumeration value="VEB" />
+          <s:enumeration value="VND" />
+          <s:enumeration value="MAD" />
+          <s:enumeration value="YER" />
+          <s:enumeration value="YUM" />
+          <s:enumeration value="ZMK" />
+          <s:enumeration value="ZWD" />
+          <s:enumeration value="ATS" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ListingTypeCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="Chinese" />
+          <s:enumeration value="Dutch" />
+          <s:enumeration value="Live" />
+          <s:enumeration value="Auction" />
+          <s:enumeration value="AdType" />
+          <s:enumeration value="StoresFixedPrice" />
+          <s:enumeration value="PersonalOffer" />
+          <s:enumeration value="FixedPriceItem" />
+          <s:enumeration value="Half" />
+          <s:enumeration value="LeadGeneration" />
+          <s:enumeration value="Express" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="BuyerPaymentMethodCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="MOCC" />
+          <s:enumeration value="AmEx" />
+          <s:enumeration value="PaymentSeeDescription" />
+          <s:enumeration value="CCAccepted" />
+          <s:enumeration value="PersonalCheck" />
+          <s:enumeration value="COD" />
+          <s:enumeration value="VisaMC" />
+          <s:enumeration value="PaisaPayAccepted" />
+          <s:enumeration value="Other" />
+          <s:enumeration value="PayPal" />
+          <s:enumeration value="Discover" />
+          <s:enumeration value="CashOnPickup" />
+          <s:enumeration value="MoneyXferAccepted" />
+          <s:enumeration value="MoneyXferAcceptedInCheckout" />
+          <s:enumeration value="OtherOnlinePayments" />
+          <s:enumeration value="Escrow" />
+          <s:enumeration value="PrePayDelivery" />
+          <s:enumeration value="CODPrePayDelivery" />
+          <s:enumeration value="PostalTransfer" />
+          <s:enumeration value="CustomCode" />
+          <s:enumeration value="LoanCheck" />
+          <s:enumeration value="CashInPerson" />
+          <s:enumeration value="ELV" />
+          <s:enumeration value="PaisaPayEscrowEMI" />
+          <s:enumeration value="Moneybookers" />
+          <s:enumeration value="Paymate" />
+          <s:enumeration value="ProPay" />
+          <s:enumeration value="StandardPayment" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="SimpleUserType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackPrivate" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackRatingStar" type="s1:FeedbackRatingStarCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackScore" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserAnonymized" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="NewUser" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegistrationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RegistrationSite" type="s1:SiteCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s1:UserStatusCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerBusinessType" type="s1:SellerBusinessCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerItemsURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="AboutMeURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="MyWorldURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="MyWorldSmallImage" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="MyWorldLargeImage" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReviewsAndGuidesURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackDetailsURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="PositiveFeedbackPercent" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellerLevel" type="s1:SellerLevelCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="TopRatedSeller" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FeedbackRatingStarCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Yellow" />
+          <s:enumeration value="Blue" />
+          <s:enumeration value="Turquoise" />
+          <s:enumeration value="Purple" />
+          <s:enumeration value="Red" />
+          <s:enumeration value="Green" />
+          <s:enumeration value="YellowShooting" />
+          <s:enumeration value="TurquoiseShooting" />
+          <s:enumeration value="PurpleShooting" />
+          <s:enumeration value="RedShooting" />
+          <s:enumeration value="GreenShooting" />
+          <s:enumeration value="SilverShooting" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SiteCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="US" />
+          <s:enumeration value="Canada" />
+          <s:enumeration value="UK" />
+          <s:enumeration value="Australia" />
+          <s:enumeration value="Austria" />
+          <s:enumeration value="Belgium_French" />
+          <s:enumeration value="France" />
+          <s:enumeration value="Germany" />
+          <s:enumeration value="Italy" />
+          <s:enumeration value="Belgium_Dutch" />
+          <s:enumeration value="Netherlands" />
+          <s:enumeration value="Spain" />
+          <s:enumeration value="Switzerland" />
+          <s:enumeration value="Taiwan" />
+          <s:enumeration value="eBayMotors" />
+          <s:enumeration value="HongKong" />
+          <s:enumeration value="Singapore" />
+          <s:enumeration value="India" />
+          <s:enumeration value="China" />
+          <s:enumeration value="Ireland" />
+          <s:enumeration value="Malaysia" />
+          <s:enumeration value="Philippines" />
+          <s:enumeration value="Poland" />
+          <s:enumeration value="Sweden" />
+          <s:enumeration value="CustomCode" />
+          <s:enumeration value="CanadaFrench" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="UserStatusCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unknown" />
+          <s:enumeration value="Suspended" />
+          <s:enumeration value="Confirmed" />
+          <s:enumeration value="Unconfirmed" />
+          <s:enumeration value="Ghost" />
+          <s:enumeration value="InMaintenance" />
+          <s:enumeration value="Deleted" />
+          <s:enumeration value="CreditCardVerify" />
+          <s:enumeration value="AccountOnHold" />
+          <s:enumeration value="Merged" />
+          <s:enumeration value="RegistrationCodeMailOut" />
+          <s:enumeration value="TermPending" />
+          <s:enumeration value="UnconfirmedHalfOptIn" />
+          <s:enumeration value="CreditCardVerifyHalfOptIn" />
+          <s:enumeration value="UnconfirmedExpress" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SellerBusinessCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Private" />
+          <s:enumeration value="Commercial" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SellerLevelCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Bronze" />
+          <s:enumeration value="Silver" />
+          <s:enumeration value="Gold" />
+          <s:enumeration value="Platinum" />
+          <s:enumeration value="Titanium" />
+          <s:enumeration value="Diamond" />
+          <s:enumeration value="None" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ListingStatusCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Active" />
+          <s:enumeration value="Ended" />
+          <s:enumeration value="Completed" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ShippingCostSummaryType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuranceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingType" type="s1:ShippingTypeCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocalPickup" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuranceOption" type="s1:InsuranceOptionCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListedShippingServiceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImportCharge" type="s1:AmountType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ShippingTypeCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Flat" />
+          <s:enumeration value="Calculated" />
+          <s:enumeration value="Freight" />
+          <s:enumeration value="Free" />
+          <s:enumeration value="NotSpecified" />
+          <s:enumeration value="FlatDomesticCalculatedInternational" />
+          <s:enumeration value="CalculatedDomesticFlatInternational" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="InsuranceOptionCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Optional" />
+          <s:enumeration value="Required" />
+          <s:enumeration value="NotOffered" />
+          <s:enumeration value="IncludedInShippingHandling" />
+          <s:enumeration value="NotOfferedOnSite" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfNameValueListType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NameValueList" type="s1:NameValueListType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="NameValueListType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Value" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CharityType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CharityID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CharityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CharityNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DonationPercent" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mission" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LogoURL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CharityListing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s1:CharityStatusCodeType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CharityStatusCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Valid" />
+          <s:enumeration value="NoLongerValid" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="StorefrontType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StoreURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="StoreName" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DistanceType">
+        <s:simpleContent>
+          <s:extension base="s:double">
+            <s:attribute name="unit" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="CountryCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="AF" />
+          <s:enumeration value="AL" />
+          <s:enumeration value="DZ" />
+          <s:enumeration value="AS" />
+          <s:enumeration value="AD" />
+          <s:enumeration value="AO" />
+          <s:enumeration value="AI" />
+          <s:enumeration value="AQ" />
+          <s:enumeration value="AG" />
+          <s:enumeration value="AR" />
+          <s:enumeration value="AM" />
+          <s:enumeration value="AW" />
+          <s:enumeration value="AU" />
+          <s:enumeration value="AT" />
+          <s:enumeration value="AZ" />
+          <s:enumeration value="BS" />
+          <s:enumeration value="BH" />
+          <s:enumeration value="BD" />
+          <s:enumeration value="BB" />
+          <s:enumeration value="BY" />
+          <s:enumeration value="BE" />
+          <s:enumeration value="BZ" />
+          <s:enumeration value="BJ" />
+          <s:enumeration value="BM" />
+          <s:enumeration value="BT" />
+          <s:enumeration value="BO" />
+          <s:enumeration value="BA" />
+          <s:enumeration value="BW" />
+          <s:enumeration value="BV" />
+          <s:enumeration value="BR" />
+          <s:enumeration value="IO" />
+          <s:enumeration value="BN" />
+          <s:enumeration value="BG" />
+          <s:enumeration value="BF" />
+          <s:enumeration value="BI" />
+          <s:enumeration value="KH" />
+          <s:enumeration value="CM" />
+          <s:enumeration value="CA" />
+          <s:enumeration value="CV" />
+          <s:enumeration value="KY" />
+          <s:enumeration value="CF" />
+          <s:enumeration value="TD" />
+          <s:enumeration value="CL" />
+          <s:enumeration value="CN" />
+          <s:enumeration value="CX" />
+          <s:enumeration value="CC" />
+          <s:enumeration value="CO" />
+          <s:enumeration value="KM" />
+          <s:enumeration value="CG" />
+          <s:enumeration value="CD" />
+          <s:enumeration value="CK" />
+          <s:enumeration value="CR" />
+          <s:enumeration value="CI" />
+          <s:enumeration value="HR" />
+          <s:enumeration value="CU" />
+          <s:enumeration value="CY" />
+          <s:enumeration value="CZ" />
+          <s:enumeration value="DK" />
+          <s:enumeration value="DJ" />
+          <s:enumeration value="DM" />
+          <s:enumeration value="DO" />
+          <s:enumeration value="TP" />
+          <s:enumeration value="EC" />
+          <s:enumeration value="EG" />
+          <s:enumeration value="SV" />
+          <s:enumeration value="GQ" />
+          <s:enumeration value="ER" />
+          <s:enumeration value="EE" />
+          <s:enumeration value="ET" />
+          <s:enumeration value="FK" />
+          <s:enumeration value="FO" />
+          <s:enumeration value="FJ" />
+          <s:enumeration value="FI" />
+          <s:enumeration value="FR" />
+          <s:enumeration value="GF" />
+          <s:enumeration value="PF" />
+          <s:enumeration value="TF" />
+          <s:enumeration value="GA" />
+          <s:enumeration value="GM" />
+          <s:enumeration value="GE" />
+          <s:enumeration value="DE" />
+          <s:enumeration value="GH" />
+          <s:enumeration value="GI" />
+          <s:enumeration value="GR" />
+          <s:enumeration value="GL" />
+          <s:enumeration value="GD" />
+          <s:enumeration value="GP" />
+          <s:enumeration value="GU" />
+          <s:enumeration value="GT" />
+          <s:enumeration value="GN" />
+          <s:enumeration value="GW" />
+          <s:enumeration value="GY" />
+          <s:enumeration value="HT" />
+          <s:enumeration value="HM" />
+          <s:enumeration value="VA" />
+          <s:enumeration value="HN" />
+          <s:enumeration value="HK" />
+          <s:enumeration value="HU" />
+          <s:enumeration value="IS" />
+          <s:enumeration value="IN" />
+          <s:enumeration value="ID" />
+          <s:enumeration value="IR" />
+          <s:enumeration value="IQ" />
+          <s:enumeration value="IE" />
+          <s:enumeration value="IL" />
+          <s:enumeration value="IT" />
+          <s:enumeration value="JM" />
+          <s:enumeration value="JP" />
+          <s:enumeration value="JO" />
+          <s:enumeration value="KZ" />
+          <s:enumeration value="KE" />
+          <s:enumeration value="KI" />
+          <s:enumeration value="KP" />
+          <s:enumeration value="KR" />
+          <s:enumeration value="KW" />
+          <s:enumeration value="KG" />
+          <s:enumeration value="LA" />
+          <s:enumeration value="LV" />
+          <s:enumeration value="LB" />
+          <s:enumeration value="LS" />
+          <s:enumeration value="LR" />
+          <s:enumeration value="LY" />
+          <s:enumeration value="LI" />
+          <s:enumeration value="LT" />
+          <s:enumeration value="LU" />
+          <s:enumeration value="MO" />
+          <s:enumeration value="MK" />
+          <s:enumeration value="MG" />
+          <s:enumeration value="MW" />
+          <s:enumeration value="MY" />
+          <s:enumeration value="MV" />
+          <s:enumeration value="ML" />
+          <s:enumeration value="MT" />
+          <s:enumeration value="MH" />
+          <s:enumeration value="MQ" />
+          <s:enumeration value="MR" />
+          <s:enumeration value="MU" />
+          <s:enumeration value="YT" />
+          <s:enumeration value="MX" />
+          <s:enumeration value="FM" />
+          <s:enumeration value="MD" />
+          <s:enumeration value="MC" />
+          <s:enumeration value="MN" />
+          <s:enumeration value="MS" />
+          <s:enumeration value="MA" />
+          <s:enumeration value="MZ" />
+          <s:enumeration value="MM" />
+          <s:enumeration value="NA" />
+          <s:enumeration value="NR" />
+          <s:enumeration value="NP" />
+          <s:enumeration value="NL" />
+          <s:enumeration value="AN" />
+          <s:enumeration value="NC" />
+          <s:enumeration value="NZ" />
+          <s:enumeration value="NI" />
+          <s:enumeration value="NE" />
+          <s:enumeration value="NG" />
+          <s:enumeration value="NU" />
+          <s:enumeration value="NF" />
+          <s:enumeration value="MP" />
+          <s:enumeration value="NO" />
+          <s:enumeration value="OM" />
+          <s:enumeration value="PK" />
+          <s:enumeration value="PW" />
+          <s:enumeration value="PS" />
+          <s:enumeration value="PA" />
+          <s:enumeration value="PG" />
+          <s:enumeration value="PY" />
+          <s:enumeration value="PE" />
+          <s:enumeration value="PH" />
+          <s:enumeration value="PN" />
+          <s:enumeration value="PL" />
+          <s:enumeration value="PT" />
+          <s:enumeration value="PR" />
+          <s:enumeration value="QA" />
+          <s:enumeration value="RE" />
+          <s:enumeration value="RO" />
+          <s:enumeration value="RU" />
+          <s:enumeration value="RW" />
+          <s:enumeration value="SH" />
+          <s:enumeration value="KN" />
+          <s:enumeration value="LC" />
+          <s:enumeration value="PM" />
+          <s:enumeration value="VC" />
+          <s:enumeration value="WS" />
+          <s:enumeration value="SM" />
+          <s:enumeration value="ST" />
+          <s:enumeration value="SA" />
+          <s:enumeration value="SN" />
+          <s:enumeration value="SC" />
+          <s:enumeration value="SL" />
+          <s:enumeration value="SG" />
+          <s:enumeration value="SK" />
+          <s:enumeration value="SI" />
+          <s:enumeration value="SB" />
+          <s:enumeration value="SO" />
+          <s:enumeration value="ZA" />
+          <s:enumeration value="GS" />
+          <s:enumeration value="ES" />
+          <s:enumeration value="LK" />
+          <s:enumeration value="SD" />
+          <s:enumeration value="SR" />
+          <s:enumeration value="SJ" />
+          <s:enumeration value="SZ" />
+          <s:enumeration value="SE" />
+          <s:enumeration value="CH" />
+          <s:enumeration value="SY" />
+          <s:enumeration value="TW" />
+          <s:enumeration value="TJ" />
+          <s:enumeration value="TZ" />
+          <s:enumeration value="TH" />
+          <s:enumeration value="TG" />
+          <s:enumeration value="TK" />
+          <s:enumeration value="TO" />
+          <s:enumeration value="TT" />
+          <s:enumeration value="TN" />
+          <s:enumeration value="TR" />
+          <s:enumeration value="TM" />
+          <s:enumeration value="TC" />
+          <s:enumeration value="TV" />
+          <s:enumeration value="UG" />
+          <s:enumeration value="UA" />
+          <s:enumeration value="AE" />
+          <s:enumeration value="GB" />
+          <s:enumeration value="US" />
+          <s:enumeration value="UM" />
+          <s:enumeration value="UY" />
+          <s:enumeration value="UZ" />
+          <s:enumeration value="VU" />
+          <s:enumeration value="VE" />
+          <s:enumeration value="VN" />
+          <s:enumeration value="VG" />
+          <s:enumeration value="VI" />
+          <s:enumeration value="WF" />
+          <s:enumeration value="EH" />
+          <s:enumeration value="YE" />
+          <s:enumeration value="YU" />
+          <s:enumeration value="ZM" />
+          <s:enumeration value="ZW" />
+          <s:enumeration value="AA" />
+          <s:enumeration value="QM" />
+          <s:enumeration value="QN" />
+          <s:enumeration value="QO" />
+          <s:enumeration value="QP" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HalfItemConditionCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="BrandNew" />
+          <s:enumeration value="LikeNew" />
+          <s:enumeration value="VeryGood" />
+          <s:enumeration value="Good" />
+          <s:enumeration value="Acceptable" />
+          <s:enumeration value="Used" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ReturnPolicyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Refund" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnsWithin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnsAccepted" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarrantyOffered" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarrantyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WarrantyDuration" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EAN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingCostPaidBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestockingFeeValue" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestockingFeeValueOption" type="s:token" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductIDType">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="type" type="s1:ProductIDCodeType" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="ProductIDCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ISBN" />
+          <s:enumeration value="EAN" />
+          <s:enumeration value="UPC" />
+          <s:enumeration value="MPN" />
+          <s:enumeration value="Keywords" />
+          <s:enumeration value="CatalogItem" />
+          <s:enumeration value="Reference" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="BusinessSellerDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s1:AddressType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalContactInformation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TradeRegistrationNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LegalInvoice" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TermsAndConditions" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VATDetails" type="s1:VATDetailsType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddressType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Street2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateOrProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneCountryPrefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneAreaOrCityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneLocalNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2CountryPrefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2AreaOrCityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone2LocalNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExternalAddressID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternationalName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternationalStateAndCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternationalStreet" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VATDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BusinessSeller" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="RestrictedToBusiness" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="VATPercent" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="VATSite" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VATID" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VariationsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Variation" type="s1:VariationType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Pictures" type="s1:PicturesType" />
+          <s:element minOccurs="0" maxOccurs="1" name="VariationSpecificsSet" type="s1:ArrayOfNameValueListType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VariationType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StartPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="VariationSpecifics" type="s1:ArrayOfNameValueListType" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantitySold" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SellingStatus" type="s1:SellingStatusType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscountPriceInfo" type="s1:DiscountPriceInfoType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SellingStatusType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ConvertedCurrentPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuantitySold" type="s:int" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DiscountPriceInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OriginalRetailPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinimumAdvertisedPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinimumAdvertisedPriceExposure" type="s1:MinimumAdvertisedPriceExposureCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PricingTreatment" type="s1:PricingTreatmentCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" default="false" name="SoldOneBay" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" default="false" name="SoldOffeBay" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MinimumAdvertisedPriceExposureCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="PreCheckout" />
+          <s:enumeration value="DuringCheckout" />
+          <s:enumeration value="None" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="PricingTreatmentCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="STP" />
+          <s:enumeration value="MAP" />
+          <s:enumeration value="None" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="PicturesType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VariationSpecificName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VariationSpecificPictureSet" type="s1:VariationSpecificPictureSetType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VariationSpecificPictureSetType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="VariationSpecificValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PictureURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="GalleryURL" type="s:anyURI" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="QuantityAvailableHintCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Limited" />
+          <s:enumeration value="MoreThan" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="QuantityInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MinimumRemnantSet" type="s:int" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UnitInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UnitType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitQuantity" type="s:double" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FindProductsResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ApproximatePages" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="MoreResults" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainHistogram" type="s1:DomainHistogramType" />
+              <s:element minOccurs="0" maxOccurs="1" name="ItemArray" type="s1:ArrayOfSimpleItemType" />
+              <s:element minOccurs="0" maxOccurs="1" name="PageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Product" type="s1:CatalogProductType" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalProducts" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="DuplicateItems" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DomainHistogramType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Domain" type="s1:HistogramEntryType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HistogramEntryType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Count" type="s:int" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSimpleItemType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Item" type="s1:SimpleItemType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CatalogProductType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DetailsURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStockPhotos" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductID" type="s1:ProductIDType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemSpecifics" type="s1:ArrayOfNameValueListType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReviewCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StockPhotoURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductState" type="s1:ProductStateCodeType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ProductStateCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Update" />
+          <s:enumeration value="UpdateMajor" />
+          <s:enumeration value="UpdateNoDetails" />
+          <s:enumeration value="Merge" />
+          <s:enumeration value="Delete" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="GetUserProfileResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="User" type="s1:SimpleUserType" />
+              <s:element minOccurs="0" maxOccurs="1" name="FeedbackHistory" type="s1:FeedbackHistoryType" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="FeedbackDetails" type="s1:FeedbackDetailType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FeedbackHistoryType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BidRetractionFeedbackPeriods" type="s1:FeedbackPeriodType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NegativeFeedbackPeriods" type="s1:FeedbackPeriodType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NeutralFeedbackPeriods" type="s1:FeedbackPeriodType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PositiveFeedbackPeriods" type="s1:FeedbackPeriodType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TotalFeedbackPeriods" type="s1:FeedbackPeriodType" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueNegativeFeedbackCount" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniquePositiveFeedbackCount" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AverageRatingDetails" type="s1:AverageRatingDetailsType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NeutralCommentCountFromSuspendedUsers" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueNeutralFeedbackCount" type="s:long" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FeedbackPeriodType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PeriodInDays" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Count" type="s:long" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AverageRatingDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RatingDetail" type="s1:FeedbackRatingDetailCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rating" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="RatingCount" type="s:long" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FeedbackRatingDetailCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="ItemAsDescribed" />
+          <s:enumeration value="Communication" />
+          <s:enumeration value="ShippingTime" />
+          <s:enumeration value="ShippingAndHandlingCharges" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="FeedbackDetailType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CommentingUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentingUserScore" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentType" type="s1:CommentTypeCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackResponse" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FollowUp" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Role" type="s1:TradingRoleCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemPrice" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="FeedbackID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentReplaced" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseReplaced" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="FollowUpReplaced" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Countable" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CommentTypeCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Positive" />
+          <s:enumeration value="Neutral" />
+          <s:enumeration value="Negative" />
+          <s:enumeration value="Withdrawn" />
+          <s:enumeration value="IndependentlyWithdrawn" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="TradingRoleCodeType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Buyer" />
+          <s:enumeration value="Seller" />
+          <s:enumeration value="CustomCode" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="GetShippingCostsResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ShippingDetails" type="s1:ShippingDetailsType" />
+              <s:element minOccurs="0" maxOccurs="1" name="ShippingCostSummary" type="s1:ShippingCostSummaryType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ShippingDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GetItFast" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuranceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuranceOption" type="s1:InsuranceOptionCodeType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InternationalShippingServiceOption" type="s1:InternationalShippingServiceOptionType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesTax" type="s1:SalesTaxType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingRateErrorMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShippingServiceOption" type="s1:ShippingServiceOptionType" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxTable" type="s1:ArrayOfTaxJurisdictionType" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternationalInsuranceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternationalInsuranceOption" type="s1:InsuranceOptionCodeType" />
+          <s:element minOccurs="0" maxOccurs="1" name="CODCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExcludeShipToLocation" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InternationalShippingServiceOptionType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingInsuranceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceName" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceAdditionalCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServicePriority" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipsTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimatedDeliveryMinTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimatedDeliveryMaxTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ImportCharge" type="s1:AmountType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SalesTaxType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SalesTaxPercent" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesTaxState" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingIncludedInTax" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesTaxAmount" type="s1:AmountType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShippingServiceOptionType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingInsuranceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceName" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServiceAdditionalCost" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingServicePriority" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpeditedService" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingTimeMin" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingTimeMax" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingSurcharge" type="s1:AmountType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipsTo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimatedDeliveryMinTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimatedDeliveryMaxTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="FastAndFree" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTaxJurisdictionType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaxJurisdiction" type="s1:TaxJurisdictionType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TaxJurisdictionType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="JurisdictionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SalesTaxPercent" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingIncludedInTax" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GeteBayTimeResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FindReviewsAndGuidesResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ReviewCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="BuyingGuideCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReviewerRank" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalHelpfulnessVotes" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProductID" type="s1:ProductIDType" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReviewsAndGuidesURL" type="s:anyURI" />
+              <s:element minOccurs="0" maxOccurs="1" name="PageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalPages" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="BuyingGuideDetails" type="s1:BuyingGuideDetailsType" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReviewDetails" type="s1:ReviewDetailsType" />
+              <s:element minOccurs="0" maxOccurs="1" name="PositiveHelpfulnessVotes" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BuyingGuideDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BuyingGuide" type="s1:BuyingGuideType" />
+          <s:element minOccurs="0" maxOccurs="1" name="BuyingGuideHub" type="s:anyURI" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BuyingGuideType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreationTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReviewDetailsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AverageRating" type="s:float" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Review" type="s1:ReviewType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReviewType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rating" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreationTime" type="s:dateTime" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetCategoryInfoResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CategoryArray" type="s1:ArrayOfCategoryType" />
+              <s:element minOccurs="0" maxOccurs="1" name="CategoryCount" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UpdateTime" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CategoryVersion" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCategoryType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Category" type="s1:CategoryType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CategoryType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryLevel" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryParentID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryParentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryNamePath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryIDPath" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LeafCategory" type="s:boolean" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FindPopularSearchesResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="PopularSearchResult" type="s1:PopularSearchesType" />
+              <s:element minOccurs="0" maxOccurs="1" name="PageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalPages" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PopularSearchesType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryParentID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QueryKeywords" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AlternativeSearches" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RelatedSearches" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryParentName" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FindPopularItemsResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ItemArray" type="s1:ArrayOfSimpleItemType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FindHalfProductsResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DomainHistogram" type="s1:DomainHistogramType" />
+              <s:element minOccurs="0" maxOccurs="1" name="PageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApproximatePages" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="MoreResults" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalProducts" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Products" type="s1:HalfProductsType" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProductSearchURL" type="s:anyURI" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HalfProductsType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Product" type="s1:HalfCatalogProductType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HalfCatalogProductType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DetailsURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="StockPhotoURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingCostSummary" type="s1:ShippingCostSummaryType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayStockPhotos" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProductID" type="s1:ProductIDType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomainName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemSpecifics" type="s1:ArrayOfNameValueListType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemArray" type="s1:ArrayOfSimpleItemType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReviewCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MinPrice" type="s1:AmountType" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GetMultipleItemsResponseType">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:AbstractResponseType">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Item" type="s1:SimpleItemType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getsingleitemdetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:getsingleitemdetails" />
+  </wsdl:message>
+  <wsdl:message name="getsingleitemdetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:getsingleitemdetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="getsingleitemdetails">
+      <wsdl:input message="tns:getsingleitemdetailsSoapIn" />
+      <wsdl:output message="tns:getsingleitemdetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getsingleitemdetails">
+      <soap:operation soapAction="http://tempuri.org/getsingleitemdetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getsingleitemdetails">
+      <soap12:operation soapAction="http://tempuri.org/getsingleitemdetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://win-nsa2a8qgujo/ebay_singleitem/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://win-nsa2a8qgujo/ebay_singleitem/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

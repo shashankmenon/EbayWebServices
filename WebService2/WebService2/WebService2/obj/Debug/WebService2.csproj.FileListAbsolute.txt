@@ -1,0 +1,15 @@
+C:\Users\Shashank\documents\visual studio 2010\Projects\WebService2\WebService2\bin\WebService2.dll
+C:\Users\Shashank\documents\visual studio 2010\Projects\WebService2\WebService2\bin\WebService2.pdb
+C:\Users\Shashank\documents\visual studio 2010\Projects\WebService2\WebService2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Shashank\documents\visual studio 2010\Projects\WebService2\WebService2\obj\Debug\WebService2.dll
+C:\Users\Shashank\documents\visual studio 2010\Projects\WebService2\WebService2\obj\Debug\WebService2.pdb
+C:\Users\Administrator\Desktop\WebService2\WebService2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\WebService2\WebService2\obj\Debug\WebService2.dll
+C:\Users\Administrator\Desktop\WebService2\WebService2\obj\Debug\WebService2.pdb
+C:\Users\Administrator\Desktop\WebService2\WebService2\bin\WebService2.dll
+C:\Users\Administrator\Desktop\WebService2\WebService2\bin\WebService2.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WebService2\WebService2\bin\WebService2.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WebService2\WebService2\bin\WebService2.pdb
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WebService2\WebService2\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WebService2\WebService2\obj\Debug\WebService2.dll
+C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WebService2\WebService2\obj\Debug\WebService2.pdb

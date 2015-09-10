@@ -1,0 +1,5 @@
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_finding\Ebay_finding\bin\Ebay_finding.dll
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_finding\Ebay_finding\bin\Ebay_finding.pdb
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_finding\Ebay_finding\obj\Debug\ResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_finding\Ebay_finding\obj\Debug\Ebay_finding.dll
+c:\users\administrator\documents\visual studio 2010\Projects\Ebay_finding\Ebay_finding\obj\Debug\Ebay_finding.pdb

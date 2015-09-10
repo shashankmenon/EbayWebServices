@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://www.ebay.com/marketplace/search/v1/services" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://www.ebay.com/marketplace/search/v1/services" />
+      <s:element name="Search_by_keyword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keyword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Search_by_keywordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Search_by_keywordResult" type="s1:SearchResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.ebay.com/marketplace/search/v1/services">
+      <s:complexType name="SearchResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="item" type="s1:SearchItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+        <s:attribute name="count" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="SearchItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="itemId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="globalId" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="subtitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="primaryCategory" type="s1:Category" />
+          <s:element minOccurs="0" maxOccurs="1" name="secondaryCategory" type="s1:Category" />
+          <s:element minOccurs="0" maxOccurs="1" name="galleryURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="galleryInfoContainer" type="s1:ArrayOfGalleryURL" />
+          <s:element minOccurs="0" maxOccurs="1" name="viewItemURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="charityId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="productId" type="s1:ProductId" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="paymentMethod" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="autoPay" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="postalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="country" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="storeInfo" type="s1:Storefront" />
+          <s:element minOccurs="0" maxOccurs="1" name="sellerInfo" type="s1:SellerInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="shippingInfo" type="s1:ShippingInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="sellingStatus" type="s1:SellingStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="listingInfo" type="s1:ListingInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="returnsAccepted" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="galleryPlusPictureURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="compatibility" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="distance" type="s1:Distance" />
+          <s:element minOccurs="0" maxOccurs="1" name="condition" type="s1:Condition" />
+          <s:element minOccurs="0" maxOccurs="1" name="isMultiVariationListing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="discountPriceInfo" type="s1:DiscountPriceInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="pictureURLSuperSize" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="pictureURLLarge" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="unitPrice" type="s1:UnitPriceInfo" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="attribute" type="s1:ItemAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="topRatedListing" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Category">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="categoryId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="categoryName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CategoryHistogram">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Category">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="count" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="childCategoryHistogram" type="s1:CategoryHistogram" />
+              <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+              <s:any minOccurs="0" maxOccurs="unbounded" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGalleryURL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="galleryURL" type="s1:GalleryURL" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GalleryURL">
+        <s:simpleContent>
+          <s:extension base="s:anyURI">
+            <s:attribute name="gallerySize" type="s1:GallerySizeEnum" use="required" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="GallerySizeEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="Small" />
+          <s:enumeration value="Medium" />
+          <s:enumeration value="Large" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ProductId">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="type" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="Storefront">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="storeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="storeURL" type="s:anyURI" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SellerInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="sellerUserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="feedbackScore" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="positiveFeedbackPercent" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="feedbackRatingStar" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="topRatedSeller" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShippingInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="shippingServiceCost" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="shippingType" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="shipToLocations" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="expeditedShipping" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="oneDayShippingAvailable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="handlingTime" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="intermediatedShipping" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Amount">
+        <s:simpleContent>
+          <s:extension base="s:double">
+            <s:attribute name="currencyId" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="SellingStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="currentPrice" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="convertedCurrentPrice" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="bidCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="sellingState" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="timeLeft" type="s:duration" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ListingInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="bestOfferEnabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="buyItNowAvailable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="buyItNowPrice" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="convertedBuyItNowPrice" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="startTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="endTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="listingType" type="s:token" />
+          <s:element minOccurs="0" maxOccurs="1" name="gift" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Distance">
+        <s:simpleContent>
+          <s:extension base="s:double">
+            <s:attribute name="unit" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="Condition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="conditionId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="conditionDisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="delimiter" type="s:string" />
+          <s:any minOccurs="0" maxOccurs="unbounded" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DiscountPriceInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="originalRetailPrice" type="s1:Amount" />
+          <s:element minOccurs="0" maxOccurs="1" name="minimumAdvertisedPriceExposure" type="s1:MapExposureEnum" />
+          <s:element minOccurs="1" maxOccurs="1" name="pricingTreatment" type="s1:PriceTreatmentEnum" />
+          <s:element minOccurs="0" maxOccurs="1" default="false" name="soldOnEbay" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" default="false" name="soldOffEbay" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MapExposureEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="PreCheckout" />
+          <s:enumeration value="DuringCheckout" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="PriceTreatmentEnum">
+        <s:restriction base="s:string">
+          <s:enumeration value="STP" />
+          <s:enumeration value="MAP" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="UnitPriceInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="quantity" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Search_by_keywordSoapIn">
+    <wsdl:part name="parameters" element="tns:Search_by_keyword" />
+  </wsdl:message>
+  <wsdl:message name="Search_by_keywordSoapOut">
+    <wsdl:part name="parameters" element="tns:Search_by_keywordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service1Soap">
+    <wsdl:operation name="Search_by_keyword">
+      <wsdl:input message="tns:Search_by_keywordSoapIn" />
+      <wsdl:output message="tns:Search_by_keywordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Service1Soap" type="tns:Service1Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Search_by_keyword">
+      <soap:operation soapAction="http://tempuri.org/Search_by_keyword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Service1Soap12" type="tns:Service1Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Search_by_keyword">
+      <soap12:operation soapAction="http://tempuri.org/Search_by_keyword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="Service1Soap" binding="tns:Service1Soap">
+      <soap:address location="http://win-nsa2a8qgujo/Ebay_finding/Service1.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Service1Soap12" binding="tns:Service1Soap12">
+      <soap12:address location="http://win-nsa2a8qgujo/Ebay_finding/Service1.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
